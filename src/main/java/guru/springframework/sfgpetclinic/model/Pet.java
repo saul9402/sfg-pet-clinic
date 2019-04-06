@@ -1,6 +1,7 @@
 package guru.springframework.sfgpetclinic.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Pet {
 
@@ -39,6 +40,21 @@ public class Pet {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(petType, pet.petType) &&
+                Objects.equals(owner, pet.owner) &&
+                Objects.equals(birthDate, pet.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(petType, owner, birthDate);
     }
 
     @Override
