@@ -19,7 +19,6 @@ public class VetController {
     public String listVets(Model model){
         System.out.println(model.asMap().toString());
         model.addAttribute("vets", vetService.findAll());
-        System.out.println(model.asMap().toString());
         return "vets/index";
     }
 }
