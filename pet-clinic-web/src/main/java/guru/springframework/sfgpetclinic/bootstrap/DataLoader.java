@@ -8,8 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * Cuando todo está listo en el contexto de spring
- * se manda a llamar a esta clase ya que implementa CommandLineRunner
+ * Cuando todo está listo en el cn se manda a llamar a esta clase ya que implementa CommandLineRunner
  */
 @Component
 public class DataLoader implements CommandLineRunner {
