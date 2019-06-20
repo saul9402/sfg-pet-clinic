@@ -1,96 +1,98 @@
 package guru.springframework.sfgpetclinic.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "pets")
 public class Pet extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Column(name ="name")
+
+	@Column(name = "name")
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "type_id")
-    private PetType petType;
-	
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
-    
-    @Column(name ="birth_date")
-    private LocalDate birthDate;
+	private PetType petType;
 
-    public Pet() {
-    }
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Owner owner;
 
-    public Pet(String name, PetType petType, Owner owner, LocalDate birthDate) {
-        this.name = name;
-        this.petType = petType;
-        this.owner = owner;
-        this.birthDate = birthDate;
-    }
+	@Column(name = "birth_date")
+	private LocalDate birthDate;
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public PetType getPetType() {
-        return petType;
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+	private Set<Visit> visits = new HashSet<Visit>();
 
-    public void setPetType(PetType petType) {
-        this.petType = petType;
-    }
+	public Pet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Owner getOwner() {
-        return owner;
-    }
+	public Pet(String name, PetType petType, Owner owner, LocalDate birthDate, Set<Visit> visits) {
+		super();
+		this.name = name;
+		this.petType = petType;
+		this.owner = owner;
+		this.birthDate = birthDate;
+		this.visits = visits;
+	}
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+	public PetType getPetType() {
+		return petType;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pet pet = (Pet) o;
-        return Objects.equals(petType, pet.petType) &&
-                Objects.equals(owner, pet.owner) &&
-                Objects.equals(birthDate, pet.birthDate);
-    }
+	public void setPetType(PetType petType) {
+		this.petType = petType;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(petType, owner, birthDate);
-    }
+	public Owner getOwner() {
+		return owner;
+	}
 
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "petType=" + petType +
-                ", owner=" + owner +
-                ", birthDate=" + birthDate +
-                '}';
-    }
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public Set<Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Set<Visit> visits) {
+		this.visits = visits;
+	}
+
+	@Override
+	public String toString() {
+		return "Pet [name=" + name + ", petType=" + petType + ", owner=" + owner + ", birthDate=" + birthDate
+				+ ", visits=" + visits + "]";
+	}
+
 }
