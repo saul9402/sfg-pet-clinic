@@ -12,11 +12,11 @@ import guru.springframework.sfgpetclinic.services.PetTypeService;
 
 @Service
 @Profile("springdatajpa")
-public class PetTpeSDJpaService implements PetTypeService {
+public class PetTypeSDJpaService implements PetTypeService {
 
 	private final PetTypeRepository petTypeRepository;
 
-	public PetTpeSDJpaService(PetTypeRepository petTypeRepository) {
+	public PetTypeSDJpaService(PetTypeRepository petTypeRepository) {
 		super();
 		this.petTypeRepository = petTypeRepository;
 	}
